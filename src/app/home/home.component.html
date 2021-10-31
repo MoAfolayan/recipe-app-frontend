@@ -1,0 +1,38 @@
+<p *ngIf="auth0Service.user$ | async as auth0user">
+    <mat-toolbar color="primary">
+        <span>
+            Hello {{ auth0user.name }}
+        </span>
+        <span class="spacer"></span>
+        <button mat-stroked-button (click)="logout()">
+            <mat-icon>
+                flight_takeoff
+            </mat-icon>
+            Log out
+        </button>
+    </mat-toolbar>
+
+</p>
+
+<!-- <pre class="col-12 text-light bg-dark p-4">{{ profileJson }}</pre>
+<pre class="col-12 text-light bg-dark p-4">{{ userJson }}</pre> -->
+
+<div class="css-grid-container">
+    <div>
+        <app-recipes [userRecipes]="userRecipes" (selectedRecipeEvent)="displaySelectedRecipe($event)">
+        </app-recipes>
+    </div>
+    <div>
+        <app-recipe-details [selectedRecipe]="selectedRecipe">
+        </app-recipe-details>
+    </div>
+</div>
+
+<div class="buttons">
+    <button mat-stroked-button (click)="getData()">
+        <mat-icon>
+            view_list
+        </mat-icon>
+        Get Data
+    </button>
+</div>

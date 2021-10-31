@@ -1,0 +1,8 @@
+.css-grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

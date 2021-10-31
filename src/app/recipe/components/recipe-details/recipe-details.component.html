@@ -1,0 +1,15 @@
+<mat-card class="card">
+    <mat-card-subtitle>
+        Ingredients
+    </mat-card-subtitle>
+    <mat-card-title *ngIf="selectedRecipe">
+        {{ selectedRecipe.name }}
+    </mat-card-title>
+    <mat-card-content *ngIf="selectedRecipe">
+        <ul>
+            <li *ngFor="let recipeItems of selectedRecipe.recipeItems; index as i">
+                {{ recipeItems.name }}
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>
