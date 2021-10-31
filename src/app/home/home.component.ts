@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { Observable } from 'rxjs';
-import { concatMap, mergeMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
 import { IRecipe } from '../recipe/recipe';
 import { RecipeService } from '../recipe/recipe.service';
 import { IUser } from '../user/user';
@@ -33,20 +33,14 @@ export class HomeComponent implements OnInit {
     )
     .subscribe();
 
-    this.user$ = this.getUser();
     this.userRecipes$ = this.getUserRecipes();
-  }
-
-  getUser(): Observable<IUser> {
-    return this.userService.getUser()
-    .pipe(
-      tap(console.log)
-    );
   }
 
   getUserRecipes(): any {
     return this.userService.getUser()
     .pipe(
+      tap(console.log),
+      tap((user: IUser) => this.user$ = of(user)),
       mergeMap((user: IUser) => {
         if (user.id) {
           console.log(user.id)
