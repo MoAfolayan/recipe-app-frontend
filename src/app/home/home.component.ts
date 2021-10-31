@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.auth0Service.user$
     .pipe(
-      tap(x => console.log(x))
+      tap(console.log)
     )
     .subscribe();
 
@@ -38,7 +38,10 @@ export class HomeComponent implements OnInit {
   }
 
   getUser(): Observable<IUser> {
-    return this.userService.getUser();
+    return this.userService.getUser()
+    .pipe(
+      tap(console.log)
+    );
   }
 
   getUserRecipes(userId: number): Observable<IRecipe[]> {
