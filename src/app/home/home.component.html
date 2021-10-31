@@ -11,11 +11,15 @@
             Log out
         </button>
     </mat-toolbar>
-
 </p>
 
-<!-- <pre class="col-12 text-light bg-dark p-4">{{ profileJson }}</pre>
-<pre class="col-12 text-light bg-dark p-4">{{ userJson }}</pre> -->
+<pre *ngIf="auth0Service.user$ | async as auth0user" class="col-12 text-light bg-dark p-4">
+    {{ auth0user.name }}
+</pre>
+
+<pre *ngIf="user$ | async as user" class="col-12 text-light bg-dark p-4">
+    {{ user.firstName }}
+</pre>
 
 <div class="css-grid-container">
     <div>
@@ -26,13 +30,4 @@
         <app-recipe-details [selectedRecipe]="selectedRecipe">
         </app-recipe-details>
     </div>
-</div>
-
-<div class="buttons">
-    <button mat-stroked-button (click)="getData()">
-        <mat-icon>
-            view_list
-        </mat-icon>
-        Get Data
-    </button>
 </div>

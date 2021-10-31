@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IRecipe } from '../recipe/recipe';
 import { RecipeService } from '../recipe/recipe.service';
+import { IUser } from '../user/user';
 
 @Component({
   selector: 'app-home',
@@ -13,46 +15,42 @@ import { RecipeService } from '../recipe/recipe.service';
 })
 export class HomeComponent implements OnInit {
 
-  profileJson: string = null;
-  userJson: string = null;
-  user: any;
+  user$: Observable<IUser>;
 
   userRecipes$: Observable<IRecipe[]>;
   selectedRecipe: IRecipe;
 
   constructor(
-    public auth0Service: AuthService, 
-    private router: Router, 
+    public auth0Service: AuthService,
+    private router: Router,
     private http: HttpClient,
     private recipeService: RecipeService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
-    this.auth0Service.user$.subscribe(
-      (profile) => (this.profileJson = JSON.stringify(profile, null, 2)),
-    );
+    this.auth0Service.user$
+    .pipe(
+      tap(x => console.log(x))
+    )
+    .subscribe();
 
-    this.getUserRecipes(1);
+    this.user$ = this.getUser();
+    this.userRecipes$ = this.getUserRecipes(1);
   }
 
-  getUserRecipes(id: number): void {
-    this.userRecipes$ = this.recipeService.getUserRecipes(id);
+  getUserRecipes(id: number): Observable<IRecipe[]> {
+    return this.recipeService.getUserRecipes(id);
   }
 
   displaySelectedRecipe(event): void {
     this.selectedRecipe = event;
   }
 
-  getData(): any {
-    this.http.get('http://localhost:5000/api/user')
-      .subscribe(
-        result => {
-          this.userJson = JSON.stringify(result, null, 2);
-          this.user = result;
-        },
-        err => console.error(`Error: ${err}`),
-        () => console.log('Observer got a complete notification')
-      );
+  getUser(): Observable<IUser> {
+    return this.http.get<IUser>('http://localhost:5000/api/user')
+      .pipe(
+        tap(x => console.log(x))
+      )
   }
 
   logout() {
