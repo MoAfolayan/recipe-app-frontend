@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(id: number): Observable<IUser> {
+  getUser(): Observable<IUser> {
     return this.http.get<IUser>(`${this.usersUrl}`)
     .pipe(
       tap(x => console.log(x))

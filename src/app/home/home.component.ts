@@ -38,11 +38,11 @@ export class HomeComponent implements OnInit {
   }
 
   getUser(): Observable<IUser> {
-    return this.userService.getUser(1);
+    return this.userService.getUser();
   }
 
-  getUserRecipes(id: number): Observable<IRecipe[]> {
-    return this.recipeService.getUserRecipes(id);
+  getUserRecipes(userId: number): Observable<IRecipe[]> {
+    return this.recipeService.getUserRecipes(userId);
   }
 
   displaySelectedRecipe(event): void {
