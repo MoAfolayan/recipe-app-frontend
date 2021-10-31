@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { concatMap, mergeMap, tap } from 'rxjs/operators';
 import { IRecipe } from '../recipe/recipe';
 import { RecipeService } from '../recipe/recipe.service';
 import { IUser } from '../user/user';
@@ -16,7 +16,7 @@ import { UserService } from '../user/user.service';
 export class HomeComponent implements OnInit {
 
   user$: Observable<IUser>;
-  userRecipes$: Observable<IRecipe[]>;
+  userRecipes$: Observable<Observable<IRecipe[]>>;
   selectedRecipe: IRecipe;
 
   constructor(
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     .subscribe();
 
     this.user$ = this.getUser();
-    this.userRecipes$ = this.getUserRecipes(1);
+    this.userRecipes$ = this.getUserRecipes();
   }
 
   getUser(): Observable<IUser> {
@@ -44,8 +44,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getUserRecipes(userId: number): Observable<IRecipe[]> {
-    return this.recipeService.getUserRecipes(userId);
+  getUserRecipes(): any {
+    return this.userService.getUser()
+    .pipe(
+      mergeMap((user: IUser) => {
+        if (user.id) {
+          console.log(user.id)
+          return this.recipeService.getUserRecipes(user.id);
+        }
+      })
+    )
   }
 
   displaySelectedRecipe(event): void {
