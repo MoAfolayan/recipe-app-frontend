@@ -1,76 +1,43 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Recipe } from './recipe';
+import { Observable } from 'rxjs';
+import { IRecipe } from './recipe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
 
-  constructor() { }
+  private recipeUrl: string = 'http://localhost:5000/api/recipes';
 
-  getRecipeByRecipeId(id: number): Recipe {
+  constructor(private http: HttpClient) { }
+
+  getRecipeByRecipeId(id: number): IRecipe {
     return {
       id: 1,
       name: 'Chocolate Truffles',
-      recipeItems: [
+      ingredients: [
         {
           id: 1,
-          name: 'Chocolate'
+          name: 'Chocolate',
+          recipeId: 2
         },
         {
           id: 2,
-          name: 'Caramel'
+          name: 'Caramel',
+          recipeId: 2
         },
         {
           id: 3,
-          name: 'White Chocolate'
+          name: 'White Chocolate',
+          recipeId: 2
         }
-      ]
+      ],
+      userId: 1
     }
   }
 
-  getUserRecipes(id: number): Recipe[] {
-    return [
-      {
-        id: 1,
-        name: 'Chocolate Truffles',
-        recipeItems: [
-          {
-            id: 1,
-            name: 'Chocolate'
-          },
-          {
-            id: 2,
-            name: 'Caramel'
-          },
-          {
-            id: 3,
-            name: 'White Chocolate'
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: 'Banana pudding',
-        recipeItems: [
-          {
-            id: 4,
-            name: 'Bananas'
-          },
-          {
-            id: 5,
-            name: 'Pudding'
-          },
-          {
-            id: 6,
-            name: 'Cream'
-          },
-          {
-            id: 7,
-            name: 'Whipped cream'
-          }
-        ]
-      }
-    ]
+  getUserRecipes(id: number): Observable<IRecipe[]> {
+    return this.http.get<IRecipe[]>(`${this.recipeUrl}/userid/${id}`);
   }
 }

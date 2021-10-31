@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Recipe } from '../../recipe';
+import { Observable } from 'rxjs';
+import { IRecipe } from '../../recipe';
 
 @Component({
   selector: 'app-recipes',
@@ -9,15 +10,15 @@ import { Recipe } from '../../recipe';
 })
 export class RecipesComponent implements OnInit {
 
-  @Input() userRecipes: Recipe[];
-  @Output() selectedRecipeEvent: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+  @Input() userRecipes$: Observable<IRecipe[]>;
+  @Output() selectedRecipeEvent: EventEmitter<IRecipe> = new EventEmitter<IRecipe>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  viewRecipeDetails(userRecipe: Recipe): void {
+  viewRecipeDetails(userRecipe: IRecipe): void {
     this.selectedRecipeEvent.emit(userRecipe);
   }
 

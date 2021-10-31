@@ -41,20 +41,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       // The AuthHttpInterceptor configuration
       httpInterceptor: {
         allowedList: [
-          // Attach access tokens to any calls to '/api' (exact match)
-          '/api',
-
-          // Attach access tokens to any calls that start with '/api/'
-          '/api/*',
 
           {
-            uri: 'http://localhost:5000/api/user',
+            uri: 'http://localhost:5000/api/*',
             tokenOptions: {
               audience: 'https://localhost:5001/api/',
             }
           },
-
-          // 'http://localhost:5000/api/user',
 
           // Match anything starting with /api/accounts, but also specify the audience and scope the attached
           // access token must have

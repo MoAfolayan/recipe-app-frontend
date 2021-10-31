@@ -1,7 +1,8 @@
-import { Ingredient } from './ingredient';
+import { IIngredient } from './ingredient';
 
-export interface Recipe {
+export interface IRecipe {
     id: number;
     name: string;
-    recipeItems: Ingredient[];
+    ingredients: IIngredient[];
+    userId: number;
 }

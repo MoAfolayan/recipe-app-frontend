@@ -3,7 +3,7 @@
         Recipes
     </mat-card-subtitle>
     <ul>
-        <li *ngFor="let userRecipe of userRecipes; index as i">
+        <li *ngFor="let userRecipe of (userRecipes$ | async); index as i">
             <button mat-stroked-button class="recipe-component-button" (click)="viewRecipeDetails(userRecipe)">
                 <h1 >
                     {{ userRecipe.name }}

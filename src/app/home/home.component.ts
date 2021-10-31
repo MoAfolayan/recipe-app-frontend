@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
-import { Recipe } from '../recipe/recipe';
+import { Observable } from 'rxjs';
+import { IRecipe } from '../recipe/recipe';
 import { RecipeService } from '../recipe/recipe.service';
 
 @Component({
@@ -16,8 +17,8 @@ export class HomeComponent implements OnInit {
   userJson: string = null;
   user: any;
 
-  userRecipes: Recipe[];
-  selectedRecipe: Recipe;
+  userRecipes$: Observable<IRecipe[]>;
+  selectedRecipe: IRecipe;
 
   constructor(
     public auth0Service: AuthService, 
@@ -35,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUserRecipes(id: number): void {
-    this.userRecipes = this.recipeService.getUserRecipes(1);
+    this.userRecipes$ = this.recipeService.getUserRecipes(id);
   }
 
   displaySelectedRecipe(event): void {

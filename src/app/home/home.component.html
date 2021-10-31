@@ -19,7 +19,7 @@
 
 <div class="css-grid-container">
     <div>
-        <app-recipes [userRecipes]="userRecipes" (selectedRecipeEvent)="displaySelectedRecipe($event)">
+        <app-recipes [userRecipes$]="userRecipes$" (selectedRecipeEvent)="displaySelectedRecipe($event)">
         </app-recipes>
     </div>
     <div>

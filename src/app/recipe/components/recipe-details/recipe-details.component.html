@@ -7,8 +7,8 @@
     </mat-card-title>
     <mat-card-content *ngIf="selectedRecipe">
         <ul>
-            <li *ngFor="let recipeItems of selectedRecipe.recipeItems; index as i">
-                {{ recipeItems.name }}
+            <li *ngFor="let ingredients of selectedRecipe.ingredients; index as i">
+                {{ ingredients.name }}
             </li>
         </ul>
     </mat-card-content>
