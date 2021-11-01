@@ -12,31 +12,6 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipeByRecipeId(id: number): IRecipe {
-    return {
-      id: 1,
-      name: 'Chocolate Truffles',
-      ingredients: [
-        {
-          id: 1,
-          name: 'Chocolate',
-          recipeId: 2
-        },
-        {
-          id: 2,
-          name: 'Caramel',
-          recipeId: 2
-        },
-        {
-          id: 3,
-          name: 'White Chocolate',
-          recipeId: 2
-        }
-      ],
-      userId: 1
-    }
-  }
-
   getUserRecipes(id: number): Observable<IRecipe[]> {
     return this.http.get<IRecipe[]>(`${this.recipeUrl}/userid/${id}`);
   }

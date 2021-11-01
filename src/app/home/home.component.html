@@ -13,14 +13,6 @@
     </mat-toolbar>
 </p>
 
-<pre *ngIf="auth0Service.user$ | async as auth0user" class="col-12 text-light bg-dark p-4">
-    {{ auth0user.name }}
-</pre>
-
-<pre *ngIf="user$ | async as user" class="col-12 text-light bg-dark p-4">
-    {{ user.firstName }}
-</pre>
-
 <div class="css-grid-container">
     <div>
         <app-recipes [userRecipes$]="userRecipes$" (selectedRecipeEvent)="displaySelectedRecipe($event)">
