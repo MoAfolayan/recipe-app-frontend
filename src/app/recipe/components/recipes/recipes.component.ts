@@ -22,4 +22,8 @@ export class RecipesComponent implements OnInit {
     this.selectedRecipeEvent.emit(userRecipe);
   }
 
+  deleteSelectedRecipes() {
+    
+  }
+
 }

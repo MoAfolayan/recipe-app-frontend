@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatIconModule,
     MatCardModule,
     MatToolbarModule,
+    MatListModule,
+    MatCheckboxModule,
     AuthModule.forRoot({
       domain: 'mo-recipe-app.us.auth0.com',
       clientId: '4IMunc5Fs8WeWEPybR9wBEJZJYYEAO2j',

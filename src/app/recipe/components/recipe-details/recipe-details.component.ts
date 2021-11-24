@@ -15,4 +15,12 @@ export class RecipeDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editRecipe() {
+
+  }
+
+  deleteRecipe() {
+    
+  }
+
 }
