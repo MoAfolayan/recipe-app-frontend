@@ -4,26 +4,40 @@ import { Observable } from 'rxjs';
 import { IRecipe } from '../../recipe';
 
 @Component({
-  selector: 'app-recipes',
-  templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css']
+   selector: 'app-recipes',
+   templateUrl: './recipes.component.html',
+   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
 
-  @Input() userRecipes$: Observable<IRecipe[]>;
-  @Output() selectedRecipeEvent: EventEmitter<IRecipe> = new EventEmitter<IRecipe>();
+   @Input() userRecipes$: Observable<IRecipe[]>;
+   @Output() selectedRecipeEvent: EventEmitter<IRecipe> = new EventEmitter<IRecipe>();
+   @Output() recipesToDeleteEvent: EventEmitter<IRecipe[]> = new EventEmitter<IRecipe[]>();
 
-  constructor() { }
+   recipesToDelete: IRecipe[] = [];
 
-  ngOnInit(): void {
-  }
+   constructor() { }
 
-  viewRecipeDetails(userRecipe: IRecipe): void {
-    this.selectedRecipeEvent.emit(userRecipe);
-  }
+   ngOnInit(): void {
+   }
 
-  deleteSelectedRecipes() {
-    
-  }
+   viewRecipeDetails(userRecipe: IRecipe): void {
+      this.selectedRecipeEvent.emit(userRecipe);
+   }
+
+   change(event, userRecipe: IRecipe) {
+      if (event.checked) {
+         this.recipesToDelete.push(userRecipe);
+      } else {
+         let index = this.recipesToDelete.findIndex(x => x.id == userRecipe.id);
+         if (index != -1) {
+            this.recipesToDelete.splice(index, 1);
+         }
+      }
+   }
+
+   deleteSelectedRecipes() {
+      this.recipesToDeleteEvent.emit(this.recipesToDelete);
+   }
 
 }

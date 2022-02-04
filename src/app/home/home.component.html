@@ -1,25 +1,26 @@
 <p *ngIf="auth0Service.user$ | async as auth0user">
-    <mat-toolbar color="primary">
-        <span>
-            Hello {{ auth0user.name }}
-        </span>
-        <span class="spacer"></span>
-        <button mat-stroked-button (click)="logout()">
-            <mat-icon>
-                flight_takeoff
-            </mat-icon>
-            Log out
-        </button>
-    </mat-toolbar>
+   <mat-toolbar color="primary">
+      <span>
+         Hello {{ auth0user.name }}
+      </span>
+      <span class="spacer"></span>
+      <button mat-stroked-button (click)="logout()">
+         <mat-icon>
+            flight_takeoff
+         </mat-icon>
+         Log out
+      </button>
+   </mat-toolbar>
 </p>
 
 <div class="css-grid-container">
-    <div>
-        <app-recipes [userRecipes$]="userRecipes$" (selectedRecipeEvent)="displaySelectedRecipe($event)">
-        </app-recipes>
-    </div>
-    <div>
-        <app-recipe-details [selectedRecipe]="selectedRecipe">
-        </app-recipe-details>
-    </div>
+   <div>
+      <app-recipes [userRecipes$]="userRecipes$" (selectedRecipeEvent)="displaySelectedRecipe($event)"
+         (recipesToDeleteEvent)="deleteRecipes($event)">
+      </app-recipes>
+   </div>
+   <div>
+      <app-recipe-details [selectedRecipe]="selectedRecipe">
+      </app-recipe-details>
+   </div>
 </div>

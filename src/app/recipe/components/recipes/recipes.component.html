@@ -1,22 +1,23 @@
 <mat-card class="card">
-    <div *ngIf="userRecipes$ | async">
-        <mat-card-subtitle>
-            Recipes
-        </mat-card-subtitle>
-        <mat-card-content>
-            <mat-selection-list #matRecipeList [multiple]="false">
-                <mat-list-option *ngFor="let userRecipe of (userRecipes$ | async); index as i" [value]="userRecipe.name" (click)="viewRecipeDetails(userRecipe)">
-                    <mat-checkbox>
-                        {{ userRecipe.name }}
-                    </mat-checkbox>
-                </mat-list-option>
-            </mat-selection-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color="accent" (click)="deleteSelectedRecipes()">
-                <i class="material-icons md-48">delete</i>
-                Delete Selected Recipes
-            </button>
-        </mat-card-actions>
-    </div>
+   <div *ngIf="userRecipes$ | async">
+      <mat-card-subtitle>
+         Recipes
+      </mat-card-subtitle>
+      <mat-card-content>
+         <mat-selection-list #matRecipeList [multiple]="false">
+            <mat-list-option *ngFor="let userRecipe of (userRecipes$ | async); index as i" [value]="userRecipe.name"
+               (click)="viewRecipeDetails(userRecipe)">
+               <mat-checkbox (change)="change($event, userRecipe)">
+                  {{ userRecipe.name }}
+               </mat-checkbox>
+            </mat-list-option>
+         </mat-selection-list>
+      </mat-card-content>
+      <mat-card-actions>
+         <button mat-stroked-button color="accent" (click)="deleteSelectedRecipes()">
+            <i class="material-icons md-48">delete</i>
+            Delete Selected Recipes
+         </button>
+      </mat-card-actions>
+   </div>
 </mat-card>
