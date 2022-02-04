@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
             tap((user: IUser) => this.user$ = of(user)),
             mergeMap((user: IUser) => {
                if (user.id) {
-                  console.log(user.id)
+                  console.log(`user id: `, user.id)
                   return this.recipeService.getUserRecipes(user.id);
                }
             })
