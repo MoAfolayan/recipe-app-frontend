@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
    }
 
    deleteRecipes(event): void {
+      console.log(`event: `, event);
       this.recipeService.deleteRecipes(event);
    }
 
