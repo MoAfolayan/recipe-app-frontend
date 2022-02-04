@@ -16,9 +16,7 @@ export class RecipeService {
       return this.http.get<IRecipe[]>(`${this.recipeUrl}/userid/${id}`);
    }
 
-   deleteRecipes(recipesToDelete: IRecipe[]): void {
-      for (let i = 0; i < recipesToDelete.length; i++) {
-         this.http.post(`${this.recipeUrl}/delete`, recipesToDelete[i]);
-      }
+   deleteRecipes(recipesToDelete: IRecipe[]): Observable<any> {
+      return this.http.post(`${this.recipeUrl}/delete-multiple`, recipesToDelete);
    }
 }
