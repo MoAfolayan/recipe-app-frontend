@@ -20,7 +20,7 @@ export class RecipeDetailsComponent implements OnInit {
   }
 
   deleteRecipe() {
-    
+
   }
 
 }

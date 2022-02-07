@@ -1,10 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Observable, interval } from 'rxjs';
-import { tap, take } from 'rxjs/operators';
-
-
+import { tap } from 'rxjs/operators';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -21,16 +17,16 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.auth.loginWithPopup()
-    .pipe(
-      tap(console.log)
-    )
-    .subscribe(
-      () => {
-        console.log('success logging in');
-        this.router.navigate(['home']);
-      },
-      err => console.error(`Error: ${err}`),
-      () => console.log('Observer got a complete notification')
-    )
+      .pipe(
+        tap(console.log)
+      )
+      .subscribe(
+        () => {
+          console.log('success logging in');
+          this.router.navigate(['home']);
+        },
+        err => console.error(`Error: ${err}`),
+        () => console.log('Observer got a complete notification')
+      )
   }
 }

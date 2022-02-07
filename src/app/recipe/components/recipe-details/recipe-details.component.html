@@ -1,27 +1,27 @@
 <mat-card class="card">
-    <mat-card-subtitle>
-        Ingredients
-    </mat-card-subtitle>
-    <div *ngIf="selectedRecipe">
-        <mat-card-title>
-            {{ selectedRecipe.name }}
-        </mat-card-title>
-        <mat-card-content>
-            <ul>
-                <li *ngFor="let ingredients of selectedRecipe.ingredients; index as i">
-                    {{ ingredients.name }}
-                </li>
-            </ul>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-stroked-button color="accent" (click)="editRecipe()">
-                <i class="material-icons md-48">edit</i>
-                Edit
-            </button>
-            <button mat-stroked-button color="accent" (click)="deleteRecipe()">
-                <i class="material-icons md-48">delete</i>
-                Delete
-            </button>
-        </mat-card-actions>
-    </div>
+  <mat-card-subtitle>
+    Ingredients
+  </mat-card-subtitle>
+  <div *ngIf="selectedRecipe">
+    <mat-card-title>
+      {{ selectedRecipe.name }}
+    </mat-card-title>
+    <mat-card-content>
+      <ul>
+        <li *ngFor="let ingredients of selectedRecipe.ingredients; index as i">
+          {{ ingredients.name }}
+        </li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button color="accent" (click)="editRecipe()">
+        <i class="material-icons md-48">edit</i>
+        Edit
+      </button>
+      <button mat-stroked-button color="accent" (click)="deleteRecipe()">
+        <i class="material-icons md-48">delete</i>
+        Delete
+      </button>
+    </mat-card-actions>
+  </div>
 </mat-card>
