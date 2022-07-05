@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from '@auth0/auth0-angular';
@@ -17,6 +18,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
     declarations: [
@@ -25,6 +28,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         LoginComponent,
         RecipesComponent,
         RecipeDetailsComponent,
+        ConfirmDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -37,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatToolbarModule,
         MatListModule,
         MatCheckboxModule,
+        MatDialogModule,
         AuthModule.forRoot({
             domain: 'mo-recipe-app.us.auth0.com',
             clientId: '4IMunc5Fs8WeWEPybR9wBEJZJYYEAO2j',

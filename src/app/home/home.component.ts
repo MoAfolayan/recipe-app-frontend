@@ -8,6 +8,9 @@ import { RecipeService } from '../recipe/recipe.service';
 import { IUser } from '../user/user';
 import { UserService } from '../user/user.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -24,7 +27,8 @@ export class HomeComponent implements OnInit {
         public auth0Service: AuthService,
         private router: Router,
         private recipeService: RecipeService,
-        private userService: UserService
+        private userService: UserService,
+        public dialog: MatDialog
     ) { }
 
     ngOnInit(): void {
@@ -57,8 +61,22 @@ export class HomeComponent implements OnInit {
 
     deleteRecipes(event): void {
         console.log(`delete multiple recipes: `, event);
-        this.recipeService.deleteRecipes(event)
-            .subscribe();
+
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+            maxWidth: "400px",
+            data: {
+                title: "Are you sure?",
+                message: "You are about to delete these recipes"
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(dialogResult => {
+            console.log(dialogResult);
+            if (dialogResult) {
+                this.recipeService.deleteRecipes(event)
+                    .subscribe();
+            }
+        });
     }
 
     editRecipe(event): void {
