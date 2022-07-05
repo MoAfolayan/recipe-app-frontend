@@ -4,15 +4,15 @@ import { Observable } from 'rxjs';
 import { IUser } from './user';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UserService {
 
-  private usersUrl: string = 'http://localhost:5000/api/user';
+    private usersUrl: string = 'http://localhost:5000/api/user';
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getUser(): Observable<IUser> {
-    return this.http.get<IUser>(`${this.usersUrl}`)
-  }
+    getUser(): Observable<IUser> {
+        return this.http.get<IUser>(`${this.usersUrl}`)
+    }
 }
