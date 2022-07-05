@@ -12,6 +12,7 @@ export class ConfirmDialogComponent implements OnInit {
 
     title: string;
     message: string;
+    displayButtons: boolean;
 
     constructor(
         public dialogRef: MatDialogRef<ConfirmDialogComponent>,
