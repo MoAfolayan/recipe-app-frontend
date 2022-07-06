@@ -98,8 +98,25 @@ export class HomeComponent implements OnInit {
     }
 
     deleteRecipe(event): void {
+        console.log(`deleting recipe: `, event);
+
         if (event) {
-            // delete selectedRecipe
+            const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+                maxWidth: "400px",
+                data: {
+                    title: "Are you sure?",
+                    message: "You are about to delete this recipe",
+                    displayButtons: true
+                }
+            });
+
+            dialogRef.afterClosed().subscribe(dialogResult => {
+                console.log(dialogResult);
+                if (dialogResult) {
+                    this.recipeService.deleteRecipe(this.selectedRecipe)
+                        .subscribe();
+                }
+            });
         }
     }
 

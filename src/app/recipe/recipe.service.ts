@@ -19,4 +19,8 @@ export class RecipeService {
     deleteRecipes(recipesToDelete: IRecipe[]): Observable<any> {
         return this.http.post(`${this.recipeUrl}/delete-multiple`, recipesToDelete);
     }
+
+    deleteRecipe(recipeToDelete: IRecipe): Observable<any> {
+        return this.http.post(`${this.recipeUrl}/delete`, recipeToDelete);
+    }
 }
